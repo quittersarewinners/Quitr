@@ -5,6 +5,7 @@ color theme: soothing/ calm
   soothing: #ede4e9, #606078, #d2b9bf, #cbbccf, #98a0b0
 */
 * {
-    background-color: #98a0b0;
+    background-image: url('https://i.pinimg.com/474x/95/e5/ed/95e5edc98f359f4cf3834d89591461df.jpg');
     /* background: linear-gradient(#98a0b0, #606078); */
+    opacity: 0.75;
 }
