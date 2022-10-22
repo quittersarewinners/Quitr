@@ -1,0 +1,10 @@
+/*
+color theme: soothing/ calm
+  ornage: #ee805b
+  
+  soothing: #ede4e9, #606078, #d2b9bf, #cbbccf, #98a0b0
+*/
+* {
+    background-color: #98a0b0;
+    /* background: linear-gradient(#98a0b0, #606078); */
+}
