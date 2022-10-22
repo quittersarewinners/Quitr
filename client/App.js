@@ -7,14 +7,19 @@ import { Route, Routes } from 'react-router-dom';
 const App = () => {
     //what hooks will we need? 
     return (
-        <Routes>
-            <Route path='/' element={
+        <div className="forBG">
             <>
-            <h1>Hello world?</h1>
-
-            </>   
-            } />
-        </Routes>
+            <div className="headertest">This is where the header will go in the fragment</div>
+            <Routes>
+                <Route path='/' element={
+                    <>
+                        <h1>This will contain the Habit Selector</h1>
+                        <h2>On button click from ^, this will have to render checkin component</h2>
+                    </>
+                } />
+            </Routes>
+            </>
+        </div>
     )
 }
 
