@@ -1,9 +1,7 @@
-const path = require('path');
-const express = require('express');
+const db = require('../db/dbConnection');
+
 const userController = {};
 
-const db = require('../db/dbConnection');
-const { LogError } = require('concurrently');
 
 userController.getUser = async (req, res, next) => {
   try {
