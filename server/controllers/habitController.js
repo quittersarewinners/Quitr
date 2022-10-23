@@ -15,7 +15,7 @@ const formatDate = dateObj => {
 };
 
 const calculateDayDiff = (oldDate, newDate) => {
-  //calculates difference down to the day between formatted dates innit
+  //calculates difference down to the day & hour between formatted dates innit
   //returns an object!
   //format: (ex) '2022/09/22 06:00'
   const oldDateDay = Number(oldDate[8] + oldDate[9]);
@@ -58,7 +58,13 @@ habitController.getHabit = async (req, res, next) => {
     };
     return next();
   } catch (error) {
-    console.log(`Error in habitController.getHabit ${error.message}`);
+    return next({
+      status: 401,
+      message: {
+        err: `'${error.message}`,
+      },
+      log: `Error occured in habitController.getHabit - ${error.message}  `,
+    });
   }
 };
 
@@ -83,7 +89,44 @@ habitController.createHabit = async (req, res, next) => {
     };
     return next();
   } catch (err) {
-    console.log('Error in createHabit in habitController', err.message);
+    return next({
+      status: 401,
+      message: {
+        err: `'${error.message}`,
+      },
+      log: `Error occured in habitController.createHabit - ${error.message}  `,
+    });
+  }
+};
+
+// Resets the user's quit timestamp when they 'cave in' on a habit
+habitController.resetHabit = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const nowTimeStamp = formatDate(new Date());
+    const updateString =
+      'UPDATE habits\
+    SET quit_timestamp = $1, streak_count = $2\
+    WHERE owner_id = $3 RETURNING *';
+    const values = [nowTimeStamp, 0, userId];
+
+    const { rows } = await db.query(updateString, values);
+    res.locals.reset = {
+      ...rows[0],
+      quitLength: {
+        days: 0,
+        hours: 0,
+      },
+    };
+    return next();
+  } catch (error) {
+    return next({
+      status: 401,
+      message: {
+        err: `'${error.message}`,
+      },
+      log: `Error occured in habitController.resetHabit - ${error.message}  `,
+    });
   }
 };
 

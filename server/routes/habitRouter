@@ -8,7 +8,11 @@ router.get('/', habitController.getHabit, (req, res, next) => {
   res.status(200).json(res.locals.habit); //sends back object of user's habit info + quitLength (days difference between now and quit start date)
 });
 
-router.post('/create', habitController.createHabit, (req, res, next) => {
+router.post('/create', habitController.createHabit, (req, res) => {
   res.status(200).json(res.locals.habit); //creates a user's habit row in habit table and sends back entire object again
 });
+
+router.post('/reset', habitController.resetHabit, (req, res) => {
+  res.status(200).json(res.locals.reset)
+})
 module.exports = router;
