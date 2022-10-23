@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = (env) => {
+module.exports = env => {
   return {
     entry: '/client/index.js',
     mode: env.NODE_ENV,
@@ -38,6 +38,10 @@ module.exports = (env) => {
           test: /\.css$/i,
           exclude: /(node_modules)/,
           use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.png|svg|jpg|gif$/,
+          use: ['file-loader'],
         },
       ],
     },
