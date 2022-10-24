@@ -9,10 +9,10 @@ function ReadyToQuitr() {
 function HabitOptions() {
 	return (
 		<select className="bad-habits">
-			<option value="smoking" />
-			<option value="also smoking" />
-			<option value="smoking as well" />
-			<option value="still smoking" />
+			<option value="smoking">smoking</option>
+			<option value="also smoking">also smoking</option>
+			<option value="smoking as well">smoking as well</option>
+			<option value="still smoking">still smoking</option>
 		</select>
 	);
 }
