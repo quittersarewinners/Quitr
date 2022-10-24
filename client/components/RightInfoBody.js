@@ -10,7 +10,7 @@ async function newDay() {
 //handleClick={} should be in button
 function RightInfoBody() {
     return (
-        <div className='right-info'>
+        <div className='rightInfoBody'>
             <h1>Feeling bad is not the end of the world, maybe you should try:</h1>
             <ul>
               <li>Chewing gum</li>

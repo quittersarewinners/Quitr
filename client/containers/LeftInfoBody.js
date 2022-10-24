@@ -7,13 +7,17 @@ function LeftInfoBody(props) {
   console.log('LEFTINFOPROPS', props);
   return (
     <div className="leftInfoBody">
-      <h1>Left side</h1>
-      {props.habit ? props.habit.habit_name : null}
-      <QuitInfo habit={props.habit} />
-      <UpcomingInfo />
-      {props.fact ? props.fact.fact : null}
-      <HealthBenefits fact={props.fact} />
-    </div>
+      {/* <h1>Left side</h1> 
+      {props.habit ? props.habit.habit_name : null} */}
+        <div className='left-up'>
+          <QuitInfo habit={props.habit} />
+          <UpcomingInfo />
+        </div>
+        <div className='up-down'>
+           {/* {props.fact ? props.fact.fact : null} */}
+            <HealthBenefits day={props.habit} fact={props.fact} />
+        </div>
+     </div>
   );
 }
 
