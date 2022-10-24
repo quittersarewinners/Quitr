@@ -95,9 +95,9 @@ habitController.createHabit = async (req, res, next) => {
     return next({
       status: 401,
       message: {
-        err: `'${error.message}`,
+        err: `'${err.message}`,
       },
-      log: `Error occured in habitController.createHabit - ${error.message}  `,
+      log: `Error occured in habitController.createHabit - ${err.message}  `,
     });
   }
 };
