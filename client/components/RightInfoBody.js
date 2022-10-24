@@ -1,4 +1,11 @@
+import axios from 'axios';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+
+async function newDay() {
+  await axios.post('/api/habit/newDay', { userId: 1 });
+}
 
 //handleClick={} should be in button
 function RightInfoBody() {
@@ -11,7 +18,9 @@ function RightInfoBody() {
               <li>Reading two pages</li>
               <li>Lollipop time</li>
             </ul>
-            <button>New Day</button>
+            <Link to='/'>
+                <button onClick={newDay}>New Day</button>
+            </Link>
         </div>
     );
 }

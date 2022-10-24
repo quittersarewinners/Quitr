@@ -29,7 +29,7 @@ color theme: soothing/ calm
     background-color: #485065;
   } */
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Fasthand&display=swap');
 
 body {
   background-color: #fff;
@@ -44,21 +44,63 @@ body {
   /* border: 2px solid #808569; */
   /* border-radius: 20px; */
   /* box-shadow: 3px 5px #923922; */
-  background-color: #a3bbce;
+  background-color: #cbbccf;
   color: #000;
   width: 100%;
   height: 80px;
   text-align: center;
-  font-family: 'Nanum Gothic Coding', monospace;  font-weight: 700;
-  font-size: larger;
+  font-family: 'Fasthand', cursive;
+  font-size: 45px;
+}
+.headertest img {
+  height: 80px;
+
 }
 /* h1 {
   text-align: center;
   color: #98a0b0;
   font-family: 'Nanum Gothic Coding', monospace;
 } */
-.selector {
+.habit-selector {
+  display: flex;
+  justify-content: space-around;
   margin-top: 80px;
+}
+.habit-selector p {
+
+}
+.bad-habits {
+  width: 300px;
+  height: 50px;
+  border: 3px solid #a3bbce;
+  border-radius: 20px;
+  font-family: 'Nanum Gothic Coding', monospace;  
+  font-weight: 700;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+.habit-selector button {
+  width: 300px;
+  height: 50px;
+  font-family: 'Nanum Gothic Coding', monospace;
+  font-size: 25px;
+  background-color: #f3e9e9;
+  border: 0px solid #f3e9e9;
+  border-radius: 50px;
+  box-shadow: 6px 6px #a3bbce;
+  margin-top: 15px;
+}
+.habit-selector button:hover {
+  background-color: #a3bbce;
+  border: 0px solid #a3bbce;
+  border-radius: 50px;
+  box-shadow: 6px 6px #f3e9e9;
+}
+p {
+  font-family: 'Nanum Gothic Coding', monospace;  
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
 }
 .checkIn {
   color: #eaded3;
@@ -73,7 +115,7 @@ body {
   height: 100px;
   width: 700px; */
   text-align: center;
-  text-shadow: 4px 2px #e4d0cf;
+  text-shadow: 4px 2px #cbbccf;
   font-family: 'Nanum Gothic Coding', monospace;  
   font-size: 45px;
 }
@@ -82,7 +124,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-button {
+.checkInButtons button {
   height: 50px;
   width: 80px;
   font-family: 'Nanum Gothic Coding', monospace;
@@ -93,35 +135,80 @@ button {
   box-shadow: 6px 6px #a3bbce;
   margin-right: 30px;
 }
-button:hover {
+.checkInButtons button:hover {
   background-color: #a3bbce;
   border: 0px solid #a3bbce;
   border-radius: 50px;
   box-shadow: 6px 6px #f3e9e9;
 }
 
-.infobody {
+.infoHeader {
+  font-family: 'Nanum Gothic Coding', monospace;
+  text-align: center;
+  color: #3f5178;
+  margin-top: 40px;
+}
+
+.infoBody {
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
 }
 
-/* leftbar, rightbar div classname NEEDED
+
 .left-info {
-  background-color: ;
   position: absolute;
-  left: 0px;
-  width: 50%;
-}
-*/
-.right-info {
-  background-color: #d3e5ee;
-  position: absolute;
-  left: 0px;
-  width: 50%;
+  left: 10px;
+  width: 70%;
+  display: grid;
+  grid-template: 
+    "quitInfo upcomingInfo" / 1fr 1fr
+    "healthBenefits healthBenefits";
 }
 
+.right-info {
+  /* background-color: #d3e5ee; */
+  height: 350px;
+  margin-top: 90px;
+  position: absolute;
+  right: 10px;
+  width: 30%;
+  border: 5px solid #d3e5ee;
+  border-radius: 20px;
+}
+.right-info h1 {
+  margin-top: 40px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 20px;
+}
+.right-info li {
+  list-style: none;
+  text-align: center;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  font-size: 20px;
+  color: #3f5178;
+}
+.right-info button {
+  text-align: center;
+  height: 40px;
+  width: 120px;
+  font-family: 'Nanum Gothic Coding', monospace;
+  font-size: 25px;
+  background-color: #f3e9e9;
+  border: 0px solid #f3e9e9;
+  border-radius: 50px;
+  box-shadow: 6px 6px #a3bbce;
+  margin-left: 60px;
+}
+.right-info button:hover {
+  background-color: #a3bbce;
+  border: 0px solid #a3bbce;
+  border-radius: 50px;
+  box-shadow: 6px 6px #f3e9e9;
+}
 .healthBenefits {
   color: #eaded3;
 }
