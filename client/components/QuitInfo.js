@@ -4,7 +4,7 @@ function QuitInfo(props) {
   return (
     <div className="quitInfo">
       <p>
-        Congratulations! You have quit for:{' '}
+        Congratulations! You have quit for:
         {props.habit ? props.habit.quitLength.days : null} days!!!
       </p>
     </div>
