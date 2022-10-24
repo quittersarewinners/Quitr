@@ -201,7 +201,8 @@ p {
   border: 0px solid #f3e9e9;
   border-radius: 50px;
   box-shadow: 6px 6px #a3bbce;
-  margin-left: 60px;
+  margin-top: 50px;
+  margin-left: 40%;
 }
 .right-info button:hover {
   background-color: #a3bbce;
