@@ -1,10 +1,127 @@
 /*
 color theme: soothing/ calm
   ornage: #ee805b
-  
   soothing: #ede4e9, #606078, #d2b9bf, #cbbccf, #98a0b0
+  background-img: ['https://i.pinimg.com/474x/52/f9/c8/52f9c8661023efac72475396b29a318a.jpg',
+  'https://images.unsplash.com/photo-1485470733090-0aae1788d5af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2117&q=80'
+  ]
 */
-* {
-    background-color: #98a0b0;
-    /* background: linear-gradient(#98a0b0, #606078); */
+/* .forBG {
+  position: relative;
+  display: coloum;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  
+}::before {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    content: ' ';
+    background-image: url('https://images.unsplash.com/photo-1485470733090-0aae1788d5af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2117&q=80'); 
+    background-size: cover;
+    background-position: top center;
+    opacity: 0.1;
+    background-color: #485065;
+  } */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
+
+
+body {
+  background-color: #fff;
+  margin: 0;
+}
+
+/* .forBG {
+  color: #000;
+} */
+
+.headertest {
+  /* border: 2px solid #808569; */
+  /* border-radius: 20px; */
+  /* box-shadow: 3px 5px #923922; */
+  background-color: #a3bbce;
+  color: #000;
+  width: 100%;
+  height: 80px;
+  text-align: center;
+  font-family: 'Nanum Gothic Coding', monospace;  font-weight: 700;
+  font-size: larger;
+}
+/* h1 {
+  text-align: center;
+  color: #98a0b0;
+  font-family: 'Nanum Gothic Coding', monospace;
+} */
+.selector {
+  margin-top: 80px;
+}
+.checkIn {
+  color: #eaded3;
+  margin-top: 80px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.checkIn h1 {
+  color: #000;
+  /* background-color: #808569;
+  height: 100px;
+  width: 700px; */
+  text-align: center;
+  text-shadow: 4px 2px #e4d0cf;
+  font-family: 'Nanum Gothic Coding', monospace;  
+  font-size: 45px;
+}
+.checkInButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  height: 50px;
+  width: 80px;
+  font-family: 'Nanum Gothic Coding', monospace;
+  font-size: 25px;
+  background-color: #f3e9e9;
+  border: 0px solid #f3e9e9;
+  border-radius: 50px;
+  box-shadow: 6px 6px #a3bbce;
+  margin-right: 30px;
+}
+button:hover {
+  background-color: #a3bbce;
+  border: 0px solid #a3bbce;
+  border-radius: 50px;
+  box-shadow: 6px 6px #f3e9e9;
+}
+
+.infobody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+/* leftbar, rightbar div classname NEEDED
+.left-info {
+  background-color: ;
+  position: absolute;
+  left: 0px;
+  width: 50%;
+}
+*/
+.right-info {
+  background-color: #d3e5ee;
+  position: absolute;
+  left: 0px;
+  width: 50%;
+}
+
+.healthBenefits {
+  color: #eaded3;
 }
