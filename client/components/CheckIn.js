@@ -19,6 +19,9 @@ const CheckIn = props => {
   async function dailyCheckIn(){
     await axios.post('/api/habit/checkin', {userId: 1})
   }
+  async function reset(){
+    await axios.post('/api/habit/reset', {userId: 1})
+  }
 
   return (
     <div className="checkIn">
@@ -30,7 +33,7 @@ const CheckIn = props => {
       <div className="checkInButtons">
         <Link to="/info">
           <button onClick={dailyCheckIn}>Yes</button>
-          <button>No</button>
+          <button onClick={reset}>No :(</button>
         </Link>
       </div>
     </div>
