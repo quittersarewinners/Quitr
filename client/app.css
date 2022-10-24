@@ -47,13 +47,13 @@ body {
   background-color: #cbbccf;
   color: #000;
   width: 100%;
-  height: 80px;
+  height: 100px;
   text-align: center;
   font-family: 'Fasthand', cursive;
   font-size: 45px;
 }
 .headertest img {
-  height: 80px;
+  height: 100px;
 
 }
 /* h1 {
@@ -156,9 +156,7 @@ p {
   justify-content: center;
   width: 100%;
 }
-
-
-.left-info {
+.leftInfoBody {
   position: absolute;
   left: 10px;
   width: 70%;
