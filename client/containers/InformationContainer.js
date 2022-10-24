@@ -14,9 +14,10 @@ const InformationContainer = props => {
     const getHabit = async () => {
       const habitData = await axios.get('/api/habit/1');
       const userData = await axios.get('/api/user?userId=1');
+      console.log(habitData.data.quitLength);
       const factData = await axios.get('/api/user/fact', {
         userId: 1,
-        quitLength: habitData.data.quitLength.days,
+        quitLength: habitData.data.quitLength,
       });
       changeUser(userData.data);
       changeHabit(habitData.data);

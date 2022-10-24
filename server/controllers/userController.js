@@ -2,7 +2,6 @@ const db = require('../db/dbConnection');
 
 const userController = {};
 
-
 userController.getUser = async (req, res, next) => {
   try {
     const { userId } = req.query;
@@ -16,9 +15,9 @@ userController.getUser = async (req, res, next) => {
     return next({
       status: error.status,
       message: {
-        err: error.message
+        err: error.message,
       },
-      log: `Error in userController getUser middleware - ${error.log}`
+      log: `Error in userController getUser middleware - ${error.log}`,
     });
   }
 };
@@ -28,7 +27,7 @@ userController.getFact = async (req, res, next) => {
     const { userId, quitLength } = req.body;
     const day = quitLength.days;
     const str = `day_${day}`;
-    const queryString = 'SELECT FROM facts f WHERE f.fact_id = $1;';
+    const queryString = 'SELECT * FROM facts f WHERE f.fact_id = $1;';
     const values = [str];
     const { rows } = await db.query(queryString, values);
     console.log(rows[0]);
@@ -37,11 +36,11 @@ userController.getFact = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      status: error.status,
+      status: 400,
       message: {
-        err: error.message
+        err: error.message,
       },
-      log: `Error in userController getUser middleware - ${error.log}`
+      log: `Error in userController getUser middleware - ${error.log}`,
     });
   }
 };
@@ -51,6 +50,5 @@ userController.getFact = async (req, res, next) => {
 //  'INSERT INTO Facts (day_3) VALUES ('Your lungs begin to relax and breathing should be easier. Nicotine is completely eliminated from the body and as a result nicotine withdrawal symptoms will have reached their peak.');';
 //  'INSERT INTO Facts (day_7) VALUES ('The average smoker will begin to notice a reduction in the number of nicotine cravings experienced in a day (you’re getting there!)');';
 //  'INSERT INTO Facts (day_14) VALUES ('Your circulation starts to improve. You may notice that physical activity becomes a lot easier. You’ll be free of the addiction and any psychological effects of withdrawal should have ended.');';
-
 
 module.exports = userController;
