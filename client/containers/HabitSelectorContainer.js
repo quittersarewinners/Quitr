@@ -1,30 +1,45 @@
 import React from "react";
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+// function ReadyToQuitr() {
+// 	return <p>Are you ready to QUITR?</p>;
+// }
 
-function ReadyToQuitr() {
-	return <p>Are you ready to QUITR?</p>;
-}
+// function HabitOptions() {
+// 	return (
+// 		<select className="bad-habits">
+// 			<option value="smoking" />
+// 			<option value="also smoking" />
+// 			<option value="smoking as well" />
+// 			<option value="still smoking" />
+// 		</select>
+// 	);
+// }
 
-function HabitOptions() {
-	return (
-		<select className="bad-habits">
-			<option value="smoking">smoking</option>
-			<option value="also smoking">also smoking</option>
-			<option value="smoking as well">smoking as well</option>
-			<option value="still smoking">still smoking</option>
-		</select>
-	);
-}
+// function QuitButton() {
+	
+// 	return <button onClick={handleClick} className="ready-to-quit">I'm ready to quit!</button>;
+// }
 
-function QuitButton() {
-	return <button className="ready-to-quit">I'm ready to quit!</button>;
-}
 
 function HabitSelector() {
+	const handleClick = async () => {
+		await axios.post('/api/habit/create', {userId: 1, habitName: 'smoking'})
+	}
+
 	return (
 		<div className="habit-selector">
-			<ReadyToQuitr /> <HabitOptions /> <QuitButton />
+			<p>Are you ready to QUITR?</p> 
+            <select className="bad-habits">
+                <option value="smoking" />
+                <option value="also smoking" />
+                <option value="smoking as well" />
+                <option value="still smoking" />
+		    </select>
+            <Link to="/info">
+            <button onClick={handleClick} className="ready-to-quit">I'm ready to quit!</button>
+            </Link>
 		</div>
 	);
 }
