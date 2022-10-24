@@ -18,7 +18,7 @@ const App = () => {
         //to maintain most likely for now
     useEffect(() => {
         async function firstTimeChecker() {
-            const { data } = await axios.get('/api/habit', {userId: 1});
+            const { data } = await axios.get('/api/habit', {userId: 2});
             //need to check if data retrieved is populated
             //if not populated, setFirstTime(true); which would then display the Habit Selector, and not the CheckIn
             //if populated, only the CheckIn should render
@@ -31,7 +31,6 @@ const App = () => {
         firstTimeChecker()
     }, []);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     return (
         <div className="forBG">
