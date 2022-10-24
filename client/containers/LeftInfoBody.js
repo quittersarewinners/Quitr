@@ -5,12 +5,12 @@ import HealthBenefits from '../components/HealthBenefits';
 
 function LeftInfoBody() {
     return (
-        <>
+        <div className="leftInfoBody">
             <h1>Left side</h1>
             <QuitInfo />
             <UpcomingInfo />
             <HealthBenefits />
-        </>
+        </div>
     );
 }
 
