@@ -22,8 +22,6 @@ function QuitButton() {
 }
 
 function HabitSelector() {
-
-
 	return (
 		<div className="habit-selector">
 			<ReadyToQuitr /> <HabitOptions /> <QuitButton />
