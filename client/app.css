@@ -55,7 +55,7 @@ body {
   font-size: 45px;
 }
 .headertest img {
-  height: 100px;
+  height: 130px;
 }
 /* h1 {
   text-align: center;
@@ -163,30 +163,42 @@ p {
   height: 420px;
   margin-top: 400px;
   position: absolute;
-  left: 10px;
+  left: 20px;
   width: 60%;
   border: 5px solid #d3e5ee;
   border-radius: 20px;
 }
 .quitInfo p {
-  font-size: 25px;
+  font-size: 40px;
+  margin-top: 60px;
+  padding: 15px;
+  color: #ee805b;
 }
 .upcomingInfo {
   font-family: Comic Sans MS, Comic Sans, cursive;
+  color: #3f5178;
   font-size: 15px;
   margin: 10px;
+  padding: 15px;
 }
 .upcomingInfo li {
   text-align: center;
+  list-style: none;
+  color: #3f5178;
 }
 .healthBenefits p {
   font-family: Comic Sans MS, Comic Sans, cursive;
-  font-size: 18px;
-  margin: 12px;
+  font-size: 20px;
+  color: #3f5178;
+  padding: 40px;
 }
-/* .left-up {
+.left-up {
   display: flex;
-} */
+}
+
+
+
+
 
 .rightInfoBody {
   /* background-color: #d3e5ee; */
