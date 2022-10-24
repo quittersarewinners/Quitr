@@ -36,7 +36,6 @@ const App = () => {
     <div className="forBG">
       <>
         <HeaderBar />
-        <InformationContainer />
         <Routes>
           <Route
             path="/"
