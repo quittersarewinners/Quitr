@@ -1,7 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {useEffect} from 'react';
+import axios from 'axios';
 
 const CheckIn = props => {
+
+  useEffect(() => {
+    async function checkedInCheck() {
+      const { data } = await axios.get('/api/habit/1');
+      if (data.has_daily_checkin){
+          window.location = '/info'
+      }
+    }
+    checkedInCheck();
+  }, []);
+
+  //onclick functionality needs to put request -- has_daily_checkin to true
+  async function dailyCheckIn(){
+    await axios.post('/api/habit/checkin', {userId: 1})
+  }
+
   return (
     <div className="checkIn">
       {props.firstTime ? (
@@ -11,7 +29,7 @@ const CheckIn = props => {
       )}
       <div className="checkInButtons">
         <Link to="/info">
-          <button>Yes</button>
+          <button onClick={dailyCheckIn}>Yes</button>
           <button>No</button>
         </Link>
       </div>

@@ -1,4 +1,6 @@
 import React from "react";
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 function ReadyToQuitr() {
 	return <p>Are you ready to QUITR?</p>;
@@ -22,9 +24,7 @@ function QuitButton() {
 function HabitSelector() {
 	return (
 		<div className="habit-selector">
-			<ReadyToQuitr />
-			<HabitOptions />
-			<QuitButton />
+			<ReadyToQuitr /> <HabitOptions /> <QuitButton />
 		</div>
 	);
 }
