@@ -22,7 +22,6 @@ import { Link } from 'react-router-dom';
 // 	return <button onClick={handleClick} className="ready-to-quit">I'm ready to quit!</button>;
 // }
 
-
 function HabitSelector() {
 	const handleClick = async () => {
 		await axios.post('/api/habit/create', {userId: 1, habitName: 'smoking'})
