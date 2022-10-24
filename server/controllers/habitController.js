@@ -31,7 +31,6 @@ const calculateDayDiff = (oldDate, newDate) => {
   const daysDifference = newDateDay - oldDateDay;
   const monthDifference = newDateMonth - oldDateMonth;
 
-  console.log('DIFFERENCE', oldDateDay, newDateDay);
   return {
     days: daysDifference + monthDifference * 30,
     hours: hourDifference,
@@ -93,7 +92,7 @@ habitController.createHabit = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      status: 401,
+      status: 400,
       message: {
         err: `'${err.message}`,
       },
@@ -119,28 +118,30 @@ habitController.checkIn = async (req, res, next) => {
     const { userId } = req.body;
     const getHabitString = 'SELECT * FROM habits h WHERE h.owner_id = $1';
     const val = [userId];
-    const { firstRows } = await db.query(getHabitString, val); //gets habits data of user to access current streak_count
-    const { streak_count } = firstRows[0];
+    const { rows } = await db.query(getHabitString, val); //gets habits data of user to access current streak_count
+    const { streak_count } = rows[0];
 
     const checkInString =
       'UPDATE habits\
      SET has_daily_checkin = $1, streak_count = $2\
      WHERE owner_id = $3 RETURNING *;';
     const values = [true, streak_count + 1, userId];
-    const { rows } = await db.query(checkInString, values); //updates the habits data of user
+    const result = await db.query(checkInString, values); //updates the habits data of user
+    updateRows = result.rows;
 
     const now = formatDate(new Date());
-    const { quit_timestamp } = rows[0];
+    const { quit_timestamp } = updateRows[0];
     const daysDiff = calculateDayDiff(quit_timestamp, now); //calculating quitLength again
 
-    res.locals.checkedIn = {
+    res.locals.checkIn = {
       //returns habits data object with quitLength property appended
       ...rows[0],
       quitLength: daysDiff,
     };
+    return next();
   } catch (err) {
     return next({
-      status: 401,
+      status: 400,
       message: {
         err: `${err.message}`,
       },

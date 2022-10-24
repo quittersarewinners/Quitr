@@ -14,7 +14,7 @@ router.post('/create', habitController.createHabit, (req, res) => {
 
 router.post('/checkin', habitController.checkIn, (req, res) => {
   //on click of check in button
-  res.status(200).json(res.locals.habit); //updates streak and sets has_daily_checkin to true;
+  res.status(200).json(res.locals.checkIn); //updates streak and sets has_daily_checkin to true;
 });
 
 router.post('/reset', habitController.resetHabit, (req, res) => {
