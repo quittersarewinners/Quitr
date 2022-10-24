@@ -98,6 +98,54 @@ habitController.createHabit = async (req, res, next) => {
     });
   }
 };
+// In order to make the has_daily_checkin field reset to false every 24 hours: we must
+// implement an EVENT in the database (preferably in the createHabit middleware).
+//
+// CREATE EVENT reset
+//     ON SCHEDULE
+//       EVERY 1 HOUR     // database event runs every hour
+//         DO
+// UPDATE habits 
+// SET has_daily_checkin = false 
+// WHERE time < date_sub(now(),interval 24 HOUR) //interval for update is 24 hours
+//   AND (has_daily_checkin = true) ;
+
+
+// Updates streak and sets has_daily_checkin to true;
+habitController.checkIn = async (req, res, next) => {
+  try{
+    const {userId} = req.body;
+    const getHabitString = 'SELECT * FROM habits h WHERE h.owner_id = $1';
+    const val = [userId];
+    const { firstRows } = await db.query(getHabitString, val);  //gets habits data of user to access current streak_count
+    const {streak_count} = firstRows[0];
+
+    const checkInString = 'UPDATE habits\
+     SET has_daily_checkin = $1, streak_count = $2\
+     WHERE owner_id = $3 RETURNING *;';
+     const values = [true, streak_count + 1 , userId];
+     const { rows } = await db.query(checkInString, values); //updates the habits data of user
+
+
+     const now = formatDate(new Date());
+     const { quit_timestamp } = rows[0];
+     const daysDiff = calculateDayDiff(quit_timestamp, now); //calculating quitLength again
+
+     res.locals.checkedIn = { //returns habits data object with quitLength property appended
+      ...rows[0],
+      quitLength: daysDiff
+
+     }
+  }catch(err){
+    return next({
+      status: 401,
+      message: {
+        err: `${err.message}`,
+      },
+      log: `Error in habitController checkIn middleware function - ${err.message}`,
+    })
+  }
+}
 
 // Resets the user's quit timestamp when they 'cave in' on a habit
 habitController.resetHabit = async (req, res, next) => {
@@ -107,7 +155,7 @@ habitController.resetHabit = async (req, res, next) => {
     const updateString =
       'UPDATE habits\
     SET quit_timestamp = $1, streak_count = $2\
-    WHERE owner_id = $3 RETURNING *';
+    WHERE owner_id = $3 RETURNING *;';
     const values = [nowTimeStamp, 0, userId];
 
     const { rows } = await db.query(updateString, values);
@@ -129,5 +177,43 @@ habitController.resetHabit = async (req, res, next) => {
     });
   }
 };
+
+//New Day
+//format: (ex) '2022/09/22 06:00'
+habitController.newDay = async (req, res, next) => {
+  try{
+    const { userId } = req.body;
+
+    const updateString = 'UPDATE habits\
+    SET has_daily_checkin = $1\
+    WHERE owner_id = $2 RETURNING *;';
+    const values = [false, userId];
+    let { rows } = await db.query(updateString, values);
+    
+    const { quit_timestamp } = rows[0];
+    const newDay = Number(quit_timestamp[8] + quit_timestamp[9]) - 1;
+    const newTimeStamp = `${quit_timestamp.slice(0, 7)}/${newDay}${quit_timestamp.slice(10)}`;
+    // console.log(newTimeStamp);
+    
+    const updateAgainString = 'UPDATE habits\
+    SET quit_timestamp=$1\
+    WHERE owner_id=$2 RETURNING *;';
+    const val = [newTimeStamp, userId];
+    const results = await db.query(updateAgainString, val);
+
+    res.locals.habit = {
+      ...results.rows[0]
+    }
+    return next()
+  }catch (err){
+    return next ({
+      status: 401,
+      message: {
+        err: `${err.message}`
+      },
+      log: `Error in habitController newDay middleware - ${err.message}`
+    });
+  }
+}
 
 module.exports = habitController;
