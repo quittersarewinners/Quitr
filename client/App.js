@@ -3,8 +3,8 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 //App.js will hold header & habit selector
-import CheckIn from './components/checkin';
-import Information from './components/information'
+import CheckIn from './components/CheckIn';
+import InformationContainer from './containers/InformationContainer'
 
 const App = () => {
     //what hooks will we need? 
@@ -18,7 +18,6 @@ const App = () => {
     //in the check-in component, will need button click to navigate to the informational component
 
 
-
     return (
         <div className="forBG">
             <>
@@ -30,7 +29,7 @@ const App = () => {
                         <CheckIn firstTime={firstTime} />
                     </>
                 } />
-                <Route path='/info' element={<Information />} />
+                <Route path='/info' element={<InformationContainer />} />
             </Routes>
             </>
         </div>
