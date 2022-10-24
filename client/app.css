@@ -32,43 +32,50 @@ color theme: soothing/ calm
 
 
 body {
-  background-color: #808569;
+  background-color: #fff;
+  margin: 0;
 }
 
-.forBG {
-  color: #923922;
-}
+/* .forBG {
+  color: #000;
+} */
 
 .headertest {
-  border: 2px solid #eaded3;
-  border-radius: 20px;
-  background-color: #eaded3;
-  box-shadow: 3px 5px #923922;
+  /* border: 2px solid #808569; */
+  /* border-radius: 20px; */
+  /* box-shadow: 3px 5px #923922; */
+  background-color: #a3bbce;
+  color: #000;
   width: 100%;
   height: 80px;
   text-align: center;
   font-family: 'Nanum Gothic Coding', monospace;  font-weight: 700;
   font-size: larger;
 }
-h1 {
+/* h1 {
   text-align: center;
-  color: #d6861f;
+  color: #98a0b0;
   font-family: 'Nanum Gothic Coding', monospace;
+} */
+.selector {
+  margin-top: 80px;
 }
 .checkIn {
   color: #eaded3;
+  margin-top: 80px;
   /* display: flex;
   justify-content: center;
   align-items: center; */
 }
 .checkIn h1 {
-  color: #eaded3;
+  color: #000;
   /* background-color: #808569;
   height: 100px;
   width: 700px; */
   text-align: center;
-  text-shadow: 4px 2px #923922;
-  font-size: 40px;
+  text-shadow: 4px 2px #e4d0cf;
+  font-family: 'Nanum Gothic Coding', monospace;  
+  font-size: 45px;
 }
 .checkInButtons {
   display: flex;
@@ -80,15 +87,41 @@ button {
   width: 80px;
   font-family: 'Nanum Gothic Coding', monospace;
   font-size: 25px;
-  background-color: #eaded3;
-  border: 0px solid #eaded3;
+  background-color: #f3e9e9;
+  border: 0px solid #f3e9e9;
   border-radius: 50px;
-  box-shadow: 6px 6px #923922;
+  box-shadow: 6px 6px #a3bbce;
   margin-right: 30px;
 }
 button:hover {
-  background-color: #923922;
-  border: 0px solid #923922;
+  background-color: #a3bbce;
+  border: 0px solid #a3bbce;
   border-radius: 50px;
-  box-shadow: 6px 6px #eaded3
+  box-shadow: 6px 6px #f3e9e9;
+}
+
+.infobody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+/* leftbar, rightbar div classname NEEDED
+.left-info {
+  background-color: ;
+  position: absolute;
+  left: 0px;
+  width: 50%;
+}
+*/
+.right-info {
+  background-color: #d3e5ee;
+  position: absolute;
+  left: 0px;
+  width: 50%;
+}
+
+.healthBenefits {
+  color: #eaded3;
 }

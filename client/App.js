@@ -4,7 +4,8 @@ import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 //App.js will hold header & habit selector
 import CheckIn from './components/CheckIn';
-import InformationContainer from './containers/InformationContainer'
+import InformationContainer from './containers/InformationContainer';
+
 
 const App = () => {
     //what hooks will we need? 
@@ -24,10 +25,10 @@ const App = () => {
             <div className="headertest">This is where the header will go in the fragment</div>
             <Routes>
                 <Route path='/' element={
-                    <>
+                    <div className="selector">
                         <h1>This will contain the Habit Selector, dependant on user signed in(fornow always show)</h1>
                         <CheckIn firstTime={firstTime} />
-                    </>
+                    </div>
                 } />
                 <Route path='/info' element={<InformationContainer />} />
             </Routes>
