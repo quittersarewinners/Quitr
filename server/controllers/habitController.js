@@ -45,6 +45,10 @@ habitController.getHabit = async (req, res, next) => {
     const habitValues = [userId];
     const { rows } = await db.query(queryString, habitValues);
 
+    if (rows.length === 0) {
+      res.locals.habit = undefined;
+      return next();
+    }
     const { quit_timestamp } = rows[0];
 
     const now = formatDate(new Date());

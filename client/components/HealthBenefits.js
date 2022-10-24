@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function HealthBenefits() {
-    return ( 
-        <div className="healthBenefits">
-            <p>Day -daycount-: Your blood pressure is going down!</p>
-        </div>
-    );
+function HealthBenefits(props) {
+	return (
+		<div className="healthBenefits">
+			<p>{props.fact}</p>
+		</div>
+	);
 }
 
 export default HealthBenefits;
