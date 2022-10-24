@@ -1,5 +1,6 @@
 import React from 'react';
 
+//handleClick={} should be in button
 function RightInfoBody() {
     return (
         <div className='right-info'>
@@ -10,7 +11,7 @@ function RightInfoBody() {
               <li>Reading two pages</li>
               <li>Lollipop time</li>
             </ul>
-            <button handleClick={}>New Day</button>
+            <button>New Day</button>
         </div>
     );
 }

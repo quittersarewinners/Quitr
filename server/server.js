@@ -13,6 +13,8 @@ app.use('/api/user', userRouter); //routes requests to /api/user to userRouter
 
 app.use('/api/habit', habitRouter); //routes requests to /api/habit to habitRouter
 
+app.use('/api/session', sessionRouter); //routes requests to /api/session to sessionRouter
+
 //Create catch-all error handler for unkown routes
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for'))
 
