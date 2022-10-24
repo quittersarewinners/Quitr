@@ -14,14 +14,11 @@ const InformationContainer = props => {
     const getHabit = async () => {
       const habitData = await axios.get('/api/habit/1');
       const userData = await axios.get('/api/user?userId=1');
-      console.log(habitData.data.quitLength);
-      const factData = await axios.get('/api/user/fact', {
-        userId: 1,
-        quitLength: habitData.data.quitLength,
-      });
+      const factData = await axios.get(`/api/user/fact?factId=1`);
+
       changeUser(userData.data);
       changeHabit(habitData.data);
-      setFact(factData.fact);
+      setFact(factData.data);
     };
     getHabit().catch(err => console.log(err));
   }, []);

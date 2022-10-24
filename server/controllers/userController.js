@@ -24,14 +24,15 @@ userController.getUser = async (req, res, next) => {
 
 userController.getFact = async (req, res, next) => {
   try {
-    const { userId, quitLength } = req.body;
-    const day = quitLength.days;
-    const str = `day_${day}`;
+    const { userId, factId } = req.query;
+    console.log('BODY', req.query);
+
+    const str = `day_${factId}`;
     const queryString = 'SELECT * FROM facts f WHERE f.fact_id = $1;';
     const values = [str];
     const { rows } = await db.query(queryString, values);
     console.log(rows[0]);
-    res.locals.user = rows[0];
+    res.locals.fact = rows[0];
 
     return next();
   } catch (error) {
