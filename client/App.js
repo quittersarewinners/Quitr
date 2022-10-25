@@ -1,8 +1,7 @@
-import './app.css';
+import './styles/app.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Route, Routes, Navigate } from 'react-router-dom';
-//App.js will hold header & habit selector
+import { Route, Routes } from 'react-router-dom';
 import CheckIn from './components/CheckIn';
 import InformationContainer from './containers/InformationContainer'
 import HeaderBar from "./components/HeaderBar";
