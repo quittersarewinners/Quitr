@@ -25,6 +25,8 @@ const sessionRouter = require('./routes/sessionRouter');
 //   res.status(200).send('received data!');
 // }
 
+
+
 app.use('/api/user', userRouter); //routes requests to /api/user to userRouter
 
 app.use('/api/habit', habitRouter); //routes requests to /api/habit to habitRouter
