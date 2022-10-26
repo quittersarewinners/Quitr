@@ -3,6 +3,7 @@ const db = require('../db/dbConnection');
 const userController = {};
 
 userController.getUser = async (req, res, next) => {
+
   try{
   const {username, password} = req.body
   const queryString = 'SELECT * FROM users WHERE username = $1;';
@@ -21,7 +22,7 @@ userController.getUser = async (req, res, next) => {
 
 userController.createUser = (req, res, next) => {
   console.log('test1');
-  const query = `INSERT INTO users (username, password) VALUES ('${req.body.username}', '${req.body.password}')`;
+  const query = `INSERT INTO users (name, username, password) VALUES ('${req.body.name}', '${req.body.username}', '${req.body.password}')`;
   db.query(query)
   .then(data => {
     console.log(data.rows);

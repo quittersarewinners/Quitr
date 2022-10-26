@@ -20,10 +20,14 @@ router.get('/', userController.getUser, (req, res, next) => {
   res.status(200).json(res.locals.user);
 });
 
-router.post('/user', userController.createUser, (req, res, next) => {
+router.post('/signup', userController.createUser, (req, res, next) => {
   
- return res.status(201).json('success')
-})
+ return res.status(201).json('signup success')
+});
 
+router.post('/login', userController.getUser, (req, res, next) => {
+  
+  return res.status(201).json(res.locals.user)
+ });
 
 module.exports = router;
