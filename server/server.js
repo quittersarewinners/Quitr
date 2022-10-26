@@ -16,9 +16,14 @@ app.use((req, res, next) => {
   res.status(200);
   next();
 });
+
 const userRouter = require('./routes/userRouter');
 const habitRouter = require('./routes/habitRouter');
 const sessionRouter = require('./routes/sessionRouter');
+
+// app.post('/login', (res, req) => {
+//   res.status(200).send('received data!');
+// }
 
 app.use('/api/user', userRouter); //routes requests to /api/user to userRouter
 
@@ -28,7 +33,7 @@ app.use('/api/session', sessionRouter); //routes requests to /api/session to ses
 
 //Create catch-all error handler for unkown routes
 app.use((req, res) =>
-  res.status(404).send("This is not the page you're looking for")
+  res.status(404).send('This is not the page you\'re looking for')
 );
 
 //Create a global error handler
