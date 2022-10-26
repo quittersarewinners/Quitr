@@ -4,38 +4,39 @@ const userController = {};
 
 userController.getUser = async (req, res, next) => {
   try{
-  const {username, password} = req.body
-  const queryString = 'SELECT * FROM users WHERE username = $1;';
-  const values = [username];
-  const findUser = await db.query(queryString, values);
-  if(findUser.rows[0].password === password){
-    res.locals.user = findUser.rows[0];
-    return next()
+    const {username, password} = req.body;
+    const queryString = 'SELECT * FROM users WHERE username = $1;';
+    const values = [username];
+    const findUser = await db.query(queryString, values);
+    if(findUser.rows[0].password === password){
+      res.locals.user = findUser.rows[0];
+      return next();
+    }
+  } catch (err) {
+    return next({
+      log: 'err get user',
+    });
   }
-} catch (err) {
-   return next({
-    log: 'err get user',
-    })
-  }
-}
+};
 
 userController.createUser = (req, res, next) => {
   console.log('test1');
+  console.log('THIS IS REQ.BODY :', req.body);
   const query = `INSERT INTO users (username, password) VALUES ('${req.body.username}', '${req.body.password}')`;
   db.query(query)
-  .then(data => {
-    console.log(data.rows);
-    return next();
-  })
-  .catch(error => {
-    return next({
-      log: 'error in createUser',
-      message: {
-        error: error
-      }
+    .then(data => {
+      console.log(data.rows);
+      return next();
+    })
+    .catch(error => {
+      return next({
+        log: 'error in createUser',
+        message: {
+          error: error
+        }
+      });
     });
-  })
-}
+};
 
 /*
 userController.getUser = async (req, res, next) => {
@@ -90,4 +91,4 @@ userController.getFact = async (req, res, next) => {
 //  'INSERT INTO Facts (day_7) VALUES ('The average smoker will begin to notice a reduction in the number of nicotine cravings experienced in a day (you’re getting there!)');';
 //  'INSERT INTO Facts (day_14) VALUES ('Your circulation starts to improve. You may notice that physical activity becomes a lot easier. You’ll be free of the addiction and any psychological effects of withdrawal should have ended.');';
 
- module.exports = userController;
+module.exports = userController;

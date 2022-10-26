@@ -20,16 +20,16 @@ const App = () => {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //on useEffect, will need to check if user has checked in today. will involve call on backend & state
   //to maintain
-  useEffect(() => {
-    //need function to get user data - will invoke within useEffect
-    async function getUserData(){
-      const { data } = await axios.get('/api/habit/1');
-      if(data) setFirstTime(false);
-      console.log(data);
-    }
-    getUserData();
-    //if data is undefined, HabitSelectorContainer should render, if it does exist, it should not.
-  }, []);
+  //   useEffect(() => {
+  //     //need function to get user data - will invoke within useEffect
+  //     async function getUserData(){
+  //       const { data } = await axios.get('/api/habit/1');
+  //       if(data) setFirstTime(false);
+  //       console.log(data);
+  //     }
+  //     getUserData();
+  //     //if data is undefined, HabitSelectorContainer should render, if it does exist, it should not.
+  //   }, []);
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
