@@ -20,6 +20,8 @@ const userRouter = require('./routes/userRouter');
 const habitRouter = require('./routes/habitRouter');
 const sessionRouter = require('./routes/sessionRouter');
 
+
+
 app.use('/api/user', userRouter); //routes requests to /api/user to userRouter
 
 app.use('/api/habit', habitRouter); //routes requests to /api/habit to habitRouter
