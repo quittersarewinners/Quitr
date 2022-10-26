@@ -23,7 +23,7 @@ function Login() {
     });
 
     server
-      .post('/login', userName
+      .post('/user/login', userName
       )
       .then((res) => {
         console.log(res);
@@ -31,12 +31,14 @@ function Login() {
       .catch((err) => {
         console.error(err);
       });
-
+    setInputUsername('');
+    setInputPassword('');
   }
 
   return (
     <div>
       <input
+        value={inputUsername}
         className='id'
         name='username'
         type='text'
@@ -45,6 +47,7 @@ function Login() {
         onChange={(e) => setInputUsername(e.target.value)}
       ></input>
       <input
+        value={inputPassword}
         className='id'
         name='password'
         type='password'
