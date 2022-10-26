@@ -1,8 +1,10 @@
 const path = require('path');
 const express = require('express');
 const PORT = 3000;
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //parses request body
 app.use((req, res, next) => {
@@ -16,9 +18,14 @@ app.use((req, res, next) => {
   res.status(200);
   next();
 });
+
 const userRouter = require('./routes/userRouter');
 const habitRouter = require('./routes/habitRouter');
 const sessionRouter = require('./routes/sessionRouter');
+
+// app.post('/login', (res, req) => {
+//   res.status(200).send('received data!');
+// }
 
 
 
@@ -30,7 +37,7 @@ app.use('/api/session', sessionRouter); //routes requests to /api/session to ses
 
 //Create catch-all error handler for unkown routes
 app.use((req, res) =>
-  res.status(404).send("This is not the page you're looking for")
+  res.status(404).send('This is not the page you\'re looking for')
 );
 
 //Create a global error handler

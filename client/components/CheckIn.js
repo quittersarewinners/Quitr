@@ -9,7 +9,7 @@ const CheckIn = props => {
     async function checkedInCheck() {
       const { data } = await axios.get('/api/habit/1');
       if (data.has_daily_checkin){
-          window.location = '/info'
+        window.location = '/info';
       }
     }
     checkedInCheck();
@@ -17,10 +17,10 @@ const CheckIn = props => {
 
   //onclick functionality needs to put request -- has_daily_checkin to true
   async function dailyCheckIn(){
-    await axios.post('/api/habit/checkin', {userId: 1})
+    await axios.post('/api/habit/checkin', {userId: 1});
   }
   async function reset(){
-    await axios.post('/api/habit/reset', {userId: 1})
+    await axios.post('/api/habit/reset', {userId: 1});
   }
 
   return (
