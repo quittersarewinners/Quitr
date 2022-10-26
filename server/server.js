@@ -1,8 +1,10 @@
 const path = require('path');
 const express = require('express');
 const PORT = 3000;
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //parses request body
 app.use((req, res, next) => {

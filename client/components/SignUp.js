@@ -1,4 +1,7 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const SignUp = (props) => {
   return (
@@ -16,6 +19,9 @@ const SignUp = (props) => {
           <input type="password" className='input-password' require>
           </input>
         </label>
+        <Link to="/"> 
+          <button>Create Account</button>
+        </Link>
       </form>
     </div>
   );

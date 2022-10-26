@@ -38,17 +38,20 @@ const App = () => {
     <div className="forBG">
       <>
         <HeaderBar />
-        {/* <Login /> */}
-        {/* <SignUp/> */}
+        
+        
         <Routes>
           <Route path='/' element={
             <>
               {/* {firstTime ? <HabitSelectorContainer setter={setFirstTime} /> : null}
               {!firstTime ? <CheckIn firstTime={firstTime} /> : null} */}
-              <HabitSelectorContainer setter={setFirstTime}/>
+              {/* <HabitSelectorContainer setter={setFirstTime}/> */}
+              <Login />
+              {/* <SignUp/> */}
             </>
           } />
-          <Route path='/info' element={<InformationContainer />} />
+          {/* <Route path='/info' element={<InformationContainer />} /> */}
+          <Route path='/SignUp' element={<SignUp/>} />
         </Routes>
       </>
     </div>
