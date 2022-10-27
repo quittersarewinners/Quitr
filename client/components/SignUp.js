@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../styles/signup.css'
 
 
 const SignUp = (props) => {
@@ -88,6 +89,7 @@ const navigate = useNavigate();
             onChange={(e) => setInputPassword(e.target.value)}
             type="password" 
             className='input-password' 
+            placeholder='Password'
             required>
           </input>
         </label>
