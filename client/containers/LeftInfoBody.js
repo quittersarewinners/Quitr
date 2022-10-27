@@ -11,7 +11,6 @@ function LeftInfoBody(props) {
   console.log('THIS IS VALUE : ', value);
   const todayDate = new Date();
   const dayDifference = moment(todayDate).diff(value, 'days');
-
   return (
     <div className="leftInfoBody">
       {/* <h1>Left side</h1> 
