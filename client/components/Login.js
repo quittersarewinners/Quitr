@@ -32,7 +32,7 @@ function Login(props) {
       .post('/user/login', userName
       )
       .then((res) => {
-        console.log(res);
+        console.log('res :', res);
         props.setUsername(res.data); 
       })
       .catch((err) => {
