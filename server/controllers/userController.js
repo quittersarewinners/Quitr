@@ -12,6 +12,10 @@ userController.getUser = async (req, res, next) => {
     //   else console.log('no match')
     // }) 
     const queryString = `SELECT * FROM users WHERE username = '${username}';`;
+    if(!username){
+      res.locals.user = false;
+      return next();
+    }
     // const values = [username]; // req.body.username
     const findUser = await db.query(queryString);
     console.log('aaa: ', findUser.rows[0].password);
@@ -22,7 +26,7 @@ userController.getUser = async (req, res, next) => {
       res.locals.user = findUser.rows[0];
     }
     else {
-      res.locals.user = 'wrong password';
+      res.locals.user = false;
     }
     return next();
     } catch (err) {
@@ -36,12 +40,24 @@ userController.getUser = async (req, res, next) => {
 
 userController.createUser = async (req, res, next) => {
  try{ const {name, username, password} = req.body;
+  const query = `SELECT username FROM users WHERE username = '${username}'`
+  const locate = await db.query(query);
+   console.log('locate', locate.rows[0])
+  // if (await db.query(query).rows[0]) {
+  //   return next({
+  //     log: 'username exists',
+  //     message: {
+  //       message: 'username already exists'
+  //     }
+  //   })
+  // }
   const saltRounds = 10;
   await bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(password, salt, async function(err, hash) {
       const queryText = `INSERT INTO users (name, username, password) VALUES ('${name}', '${username}', '${hash}') RETURNING *;`;
  const newUser = await db.query(queryText)
- console.log('USER', newUser.rows)
+ //console.log('USER', newUser.rows)
+ res.locals.userInfo = newUser
       return next();
     })
 
