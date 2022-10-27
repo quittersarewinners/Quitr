@@ -9,6 +9,8 @@ import HeaderBar from './components/HeaderBar';
 import HabitSelectorContainer from './containers/HabitSelectorContainer';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import Calendar from 'react-calendar'
+// import 'react-calendar/dist/Calendar.css';
 
 
 const App = () => {
@@ -16,7 +18,7 @@ const App = () => {
   const [firstTime, setFirstTime] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true);
   const [hasCheckedIn, setHasCheckedIn] = useState(false);
-
+  const [userName, setUsername] = useState('');
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //on useEffect, will need to check if user has checked in today. will involve call on backend & state
   //to maintain
@@ -31,7 +33,7 @@ const App = () => {
   //     //if data is undefined, HabitSelectorContainer should render, if it does exist, it should not.
   //   }, []);
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+console.log('userName :', userName)
 
 
   return (
@@ -46,12 +48,14 @@ const App = () => {
               {/* {firstTime ? <HabitSelectorContainer setter={setFirstTime} /> : null}
               {!firstTime ? <CheckIn firstTime={firstTime} /> : null} */}
               {/* <HabitSelectorContainer setter={setFirstTime}/> */}
-              <Login />
+              <Login setUsername={setUsername} />
+              <Calendar/>
               {/* <SignUp/> */}
             </>
           } />
           {/* <Route path='/info' element={<InformationContainer />} /> */}
-          <Route path='/SignUp' element={<SignUp/>} />
+          <Route path='/signup' element={<SignUp/>} />
+          <Route path='/info' element={<InformationContainer userInfo={userName}/>} />
         </Routes>
       </>
     </div>

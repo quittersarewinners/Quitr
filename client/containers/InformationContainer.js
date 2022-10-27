@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import InformationHeader from '../components/InformationHeader';
 import RightInfoBody from '../components/RightInfoBody';
 import LeftInfoBody from './LeftInfoBody';
+import HabitSelectorContainer from './HabitSelectorContainer';
 
 // This is the main container that will call the backend to pass the result of that information to the child components
 const InformationContainer = (props) => {
   const [habit, changeHabit] = useState();
   const [user, changeUser] = useState();
   const [fact, setFact] = useState();
-
+ 
   useEffect(() => {
     // this calls the backend to get the habit, user, and corresponding fact.
     // Due to lack of user auth userId 1 is hardcoded in most places.
@@ -31,9 +32,13 @@ const InformationContainer = (props) => {
 
   return (
     <>
-      <InformationHeader user={user} />
+      <InformationHeader user={props.userInfo.name} />
       <div className="infoBody">
         <LeftInfoBody habit={habit} fact={fact} /> <RightInfoBody />
+        
+      </div>
+      <div> 
+      <HabitSelectorContainer />
       </div>
     </>
   );

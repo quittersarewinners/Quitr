@@ -29,7 +29,7 @@ function HabitSelector() {
 
   return (
     <div className="habit-selector">
-      <p>Are you ready to QUITR?</p>
+    
       <select className="bad-habits">
         <option>Smoking</option>
         <option>Smoking is the only option!</option>
