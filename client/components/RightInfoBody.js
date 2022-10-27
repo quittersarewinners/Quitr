@@ -3,15 +3,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-async function newDay() {
-  await axios.post('/api/habit/newDay', { userId: 1 });
-}
+// async function newDay() {
+//   await axios.post('/api/habit/newDay', { userId: 1 });
+// }
 
 //handleClick={} should be in button
 function RightInfoBody() {
   return (
     <div className='rightInfoBody'>
-      <h1>Feeling bad is not the end of the world, maybe you should try:</h1>
+      <h1>How are you feeling today?</h1>
       <ul>
         <li>Chewing gum</li>
         <li>'Smoking' air</li>
