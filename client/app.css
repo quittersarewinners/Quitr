@@ -72,7 +72,7 @@ body {
   margin-right: 35px;
 }
 .bad-habits {
-  width: 200px;
+  width: 30rem;
   height: 50px;
   border: 3px solid #a3bbce;
   border-radius: 20px;
@@ -82,7 +82,7 @@ body {
   margin-top: 15px;
 }
 .habit-selector button {
-  width: 200px;
+  width: 12rem;
   height: 50px;
   font-family: 'Nanum Gothic Coding', monospace;
   font-size: 25px;
@@ -160,12 +160,13 @@ p {
 }
 .leftInfoBody {
   max-height: fit-content;
-  margin-top: 55rem;
+  margin-top: 57.5rem;
   position: absolute;
   left: 20px;
   width: 60%;
   border: 5px solid #d3e5ee;
   border-radius: 20px;
+  margin-left: 4rem;
 }
 .quitInfo p {
   font-size: 40px;
@@ -201,13 +202,14 @@ p {
 
 .rightInfoBody {
   /* background-color: #d3e5ee; */
-  height: 420px;
-  margin-top: 39rem;
+  max-height: fit-content;
+  margin-top: 40rem;
   position: absolute;
   right: 20px;
   width: 30%;
   border: 5px solid #d3e5ee;
   border-radius: 20px;
+  margin-right: 4rem;
 }
 .rightInfoBody h1 {
   margin-top: 50px;
@@ -246,6 +248,14 @@ p {
   color: #eaded3;
 } */
 
+.feelingCard {
+  margin: 2rem;
+  background-color: #B1B2FF;
+  padding: 2rem;
+  border-radius: .25rem;
+}
+
+
 
 /*  THIS IS FOR THE CALENDAR */ 
 
@@ -257,7 +267,10 @@ p {
   border: 1px solid #a0a096;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
-
+  border-radius: 8px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border-style: none;
+  margin: 1rem;
 }
 .react-calendar--doubleView {
   width: 700px;

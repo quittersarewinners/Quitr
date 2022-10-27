@@ -6,12 +6,14 @@ function UpcomingInfo(props) {
 
   return ( 
     <div className="upcomingInfo">
-      <p>What you may expect in the next few days:</p>
+      <p>Way to go! These are your major health improvements so far!</p>
       {/* {} */}
       <ul>
-        <li>Your heart rate is {2*props.daysOff}% better</li>
-        {/* <li>Your pulse is {fact}% better</li>
-        <li>{fact}</li> */}
+        <li>Your heart rate is {1.5 * props.daysOff}% better</li>
+        <li>Your oxygen levels are {.89 * props.daysOff} % better</li>
+        <li>Your bronchial tubes have started to relax and your breathing should be {2.3 * props.daysOff} % better</li>
+        <li>Your bad breath is {3 * props.daysOff} % better</li>
+        <li>Your circulation is {0.7 * props.daysOff} % better</li>
       </ul>
     </div>
   );

@@ -1,8 +1,9 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 function QuitInfo(props) {
-
-  // {props.habit ? props.habit.quitLength.days : null}
+ console.log('this is props.dayoff :',props.daysOff )
+ console.log('this is props.newday :',props.newDay )
   return (
     <div className="quitInfo">
       <p>

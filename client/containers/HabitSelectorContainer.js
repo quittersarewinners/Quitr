@@ -32,11 +32,14 @@ function HabitSelector() {
     
       <select className="bad-habits">
         <option>Smoking</option>
-        <option>Smoking is the only option!</option>
+        <option>Coding</option>
+        <option>Drinking</option>
+        <option>Gaming</option>
+        <option>Spending</option>
       </select>
       <Link to="/info">
         <button onClick={handleClick} className="ready-to-quit">
-          I'm ready to quit!
+          Choose your bad habit!
         </button>
       </Link>
     </div>
