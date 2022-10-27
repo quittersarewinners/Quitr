@@ -36,7 +36,7 @@ const InformationContainer = (props) => {
     <>
       <InformationHeader user={props.userInfo.name} />
       <div className="infoBody">
-        <LeftInfoBody fact={fact} /> <RightInfoBody />
+        <LeftInfoBody fact={fact} user={props.userInfo}/> <RightInfoBody />
         {/* <Calendar onChange={onChange} value={value}/> */}
       </div>
       <div> 
