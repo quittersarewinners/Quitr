@@ -39,25 +39,26 @@ const calculateDayDiff = (oldDate, newDate) => {
 
 habitController.getHabit = async (req, res, next) => {
   try {
-    const { userId } = req.params;
-    const queryString = 'SELECT * FROM habits h WHERE h.owner_id = $1;';
-    const habitValues = [userId];
-    const { rows } = await db.query(queryString, habitValues);
+    //const { userId } = req.params;
+    const queryString = `SELECT * FROM habits WHERE user_id = '${res.locals.user.user_id}'`;
+    //const habitValues = [userId];
+    const { rows } = await db.query(queryString);
+   res.locals.row = rows[0];
+   console.log('res.locals.row: ', res.locals.row);
+    // if (rows.length === 0) {
+    //   res.locals.habit = undefined;
+    //   return next();
+    // }
+    // const { quit_timestamp } = rows[0];
 
-    if (rows.length === 0) {
-      res.locals.habit = undefined;
-      return next();
-    }
-    const { quit_timestamp } = rows[0];
+    // const now = formatDate(new Date());
 
-    const now = formatDate(new Date());
+    // const dayDiff = calculateDayDiff(quit_timestamp, now); //does the math via helper function
 
-    const dayDiff = calculateDayDiff(quit_timestamp, now); //does the math via helper function
-
-    res.locals.habit = {
-      ...rows[0],
-      quitLength: dayDiff, //appends a property 'quitLength' object to habit object
-    };
+    // res.locals.habit = {
+    //   ...rows[0],
+    //   quitLength: dayDiff, //appends a property 'quitLength' object to habit object
+    // };
     return next();
   } catch (error) {
     return next({
@@ -72,8 +73,11 @@ habitController.getHabit = async (req, res, next) => {
 
 habitController.createHabit = async (req, res, next) => {
   try {
-    const { user_id, type } = req.body;
-    const nowTimeStamp = formatDate(new Date());
+    const { type } = req.body;
+    const { user_id } = res.locals.userInfo.rows[0];
+    console.log('USERID', user_id)
+    console.log('RESLOCALSUSER', res.locals.userInfo)
+    const nowTimeStamp = new Date();
     const insertString =
       `INSERT INTO habits (user_id, type, start_date) VALUES ('${user_id}', '${type}', '${nowTimeStamp}') RETURNING *;`
     //const values = [userId, habitName, nowTimeStamp, true, 0];
@@ -85,6 +89,7 @@ console.log('req', newHabit.rows)
       //   hours: 0,
       // }, //appends a property 'quitLength' object to habit object
     // }
+    res.locals.habits = newHabit;
     return next();
   } catch (err) {
     return next({

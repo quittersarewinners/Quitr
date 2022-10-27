@@ -6,7 +6,7 @@ function QuitInfo(props) {
   return (
     <div className="quitInfo">
       <p>
-        Congratulations! You have quit for: {props.habit} days!!!
+        Congratulations! You have quit for: {props.daysOff} days!!!
       </p>
     </div>
   );
