@@ -1,0 +1,30 @@
+
+
+button{
+    background-color: rgb(132, 143, 255);
+    height: 2rem;
+    transition: .3s;
+    color: whitesmoke
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: blueviolet;
+}
+
+form {
+    padding-top: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label{
+    padding: 5px;
+}
+
+input{
+    width: 15rem;
+    height: 2rem;
+}
