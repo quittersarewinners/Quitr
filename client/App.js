@@ -9,7 +9,7 @@ import HeaderBar from './components/HeaderBar';
 import HabitSelectorContainer from './containers/HabitSelectorContainer';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-import Calendar from 'react-calendar'
+import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 
 
@@ -33,7 +33,7 @@ const App = () => {
   //     //if data is undefined, HabitSelectorContainer should render, if it does exist, it should not.
   //   }, []);
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-console.log('userName :', userName)
+  console.log('userName :', userName);
 
 
   return (
@@ -49,7 +49,7 @@ console.log('userName :', userName)
               {!firstTime ? <CheckIn firstTime={firstTime} /> : null} */}
               {/* <HabitSelectorContainer setter={setFirstTime}/> */}
               <Login setUsername={setUsername} />
-              <Calendar/>
+          
               {/* <SignUp/> */}
             </>
           } />
