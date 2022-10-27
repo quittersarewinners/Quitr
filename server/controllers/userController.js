@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 
 const userController = {};
-
+//ITTERATION GROUP
 userController.getUser = async (req, res, next) => {
   try{
     const {username, password} = req.body;
@@ -37,7 +37,7 @@ userController.getUser = async (req, res, next) => {
 
 }
   
-
+// ITTERATION GROUP
 userController.createUser = async (req, res, next) => {
  try{ const {name, username, password} = req.body;
   const query = `SELECT username FROM users WHERE username = '${username}'`
