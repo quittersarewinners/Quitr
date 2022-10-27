@@ -21,11 +21,16 @@ router.get('/', userController.getUser, (req, res, next) => {
   res.status(200).json(res.locals.user);
 });
 
+//ITTERATION GROUP
+
 router.post('/signup', userController.createUser, habitController.createHabit, (req, res, next) => {
   const sendBack = {...res.locals.userInfo.rows[0], ...res.locals.habits.rows[0]}
   console.log('SENDBACK', sendBack)
  return res.status(201).json(sendBack)
 });
+
+
+//ITTERATION GROUP
 
 router.post('/login', userController.getUser, habitController.getHabit, (req, res, next) => {
   //console.log('LOCALS+++>===', res.locals.user)

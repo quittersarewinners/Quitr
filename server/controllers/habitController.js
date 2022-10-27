@@ -2,40 +2,7 @@ const db = require('../db/dbConnection');
 
 const habitController = {};
 
-const formatDate = dateObj => {
-  //converts date object to this format: '2022/09/22 06:00' (ex)
-  const timeStamp = new Date(); //Oi, Remember that date object month is 0 based, so "09" is October
-  // let hours = timeStamp.getHours().toString();
-  let day = timeStamp.getDate().toString();
-  let month = timeStamp.getMonth().toString();
-  const year = timeStamp.getFullYear().toString();
-  if (day.length < 2) day = `0${day}`;
-  if (month.length < 2) month = `0${month}`;
-  return `${year}/${month}/${day}`;
-};
-
-const calculateDayDiff = (oldDate, newDate) => {
-  //calculates difference down to the day & hour between formatted dates innit
-  //returns an object!
-  //format: (ex) '2022/09/22 06:00'
-  const oldDateDay = Number(oldDate[8] + oldDate[9]);
-  const newDateDay = Number(newDate[8] + newDate[9]);
-
-  const oldDateMonth = Number(oldDate[5] + oldDate[6]);
-  const newDateMonth = Number(newDate[5] + newDate[6]);
-
-  const oldDateHour = Number(oldDate[11] + oldDate[12]);
-  const newDateHour = Number(newDate[11] + newDate[12]);
-
-  const hourDifference = newDateHour - oldDateHour;
-  const daysDifference = newDateDay - oldDateDay;
-  const monthDifference = newDateMonth - oldDateMonth;
-
-  return {
-    days: daysDifference + monthDifference * 30,
-    hours: hourDifference,
-  };
-};
+// ITTERATION GROUP
 
 habitController.getHabit = async (req, res, next) => {
   try {
@@ -71,6 +38,8 @@ habitController.getHabit = async (req, res, next) => {
   }
 };
 
+//ITTERATION GROUP
+
 habitController.createHabit = async (req, res, next) => {
   try {
     const { type } = req.body;
@@ -101,6 +70,66 @@ console.log('req', newHabit.rows)
     });
   }
 };
+// ITTERATION GROUP
+habitController.updateStartDate = async (req, res, next) => {
+  try{
+    const {user_id, start_date} = req.body;
+    const queryText = `UPDATE habits SET start_date = '${start_date}' WHERE user_id = '${user_id}' RETURNING *`;
+    const editDate = await db.query(queryText);
+    console.log('EDITDATE:', editDate);
+    res.locals.update = editDate.rows[0];
+    return next();
+  } catch (err) {
+    return next ({
+      status: 400,
+      message: {
+        err: `${err.message}`
+      },
+      log: 'Error in habitController.updateStartDate'
+    })
+
+  }
+}
+
+/*  SCRATCH TEAM (ANOTHER TEAM) STUFF BELOW */
+
+const formatDate = dateObj => {
+  //converts date object to this format: '2022/09/22 06:00' (ex)
+  const timeStamp = new Date(); //Oi, Remember that date object month is 0 based, so "09" is October
+  // let hours = timeStamp.getHours().toString();
+  let day = timeStamp.getDate().toString();
+  let month = timeStamp.getMonth().toString();
+  const year = timeStamp.getFullYear().toString();
+  if (day.length < 2) day = `0${day}`;
+  if (month.length < 2) month = `0${month}`;
+  return `${year}/${month}/${day}`;
+};
+
+const calculateDayDiff = (oldDate, newDate) => {
+  //calculates difference down to the day & hour between formatted dates innit
+  //returns an object!
+  //format: (ex) '2022/09/22 06:00'
+  const oldDateDay = Number(oldDate[8] + oldDate[9]);
+  const newDateDay = Number(newDate[8] + newDate[9]);
+
+  const oldDateMonth = Number(oldDate[5] + oldDate[6]);
+  const newDateMonth = Number(newDate[5] + newDate[6]);
+
+  const oldDateHour = Number(oldDate[11] + oldDate[12]);
+  const newDateHour = Number(newDate[11] + newDate[12]);
+
+  const hourDifference = newDateHour - oldDateHour;
+  const daysDifference = newDateDay - oldDateDay;
+  const monthDifference = newDateMonth - oldDateMonth;
+
+  return {
+    days: daysDifference + monthDifference * 30,
+    hours: hourDifference,
+  };
+};
+
+
+
 // In order to make the has_daily_checkin field reset to false every 24 hours: we must
 // implement an EVENT in the database (preferably in the createHabit middleware).
 //
@@ -150,6 +179,8 @@ habitController.checkIn = async (req, res, next) => {
     });
   }
 };
+
+
 
 // Resets the user's quit timestamp when they 'cave in' on a habit
 habitController.resetHabit = async (req, res, next) => {
