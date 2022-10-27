@@ -14,12 +14,13 @@ function LeftInfoBody(props) {
   //Using moment library to do the math from the start date to the current date
   //we should be accsesing the all the user information from the DB
   console.log('THIS SHOULD BE USERINFO :', props.user);
-  const dayDifference = moment(todayDate).diff(value, 'days');
+  const dayDifference = moment(props.user.start_date).diff(value, 'days');
   // console.log('this is props.user', props.user.start_date);
 
   const userObj = {
-    username: props.user,
-    start_date: value
+    username: props.user.username,
+    start_date: value,
+    user_id: props.user.user_id
   };
 
   useEffect(() => {
@@ -39,7 +40,7 @@ function LeftInfoBody(props) {
       <div className='left-up'>
         <QuitInfo daysOff={dayDifference} />
        
-        <UpcomingInfo />
+        <UpcomingInfo daysOff={dayDifference}/>
       </div>
       <div className='up-down'>
         {/* {props.fact ? props.fact.fact : null} */}
