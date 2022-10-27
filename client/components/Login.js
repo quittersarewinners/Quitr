@@ -33,7 +33,7 @@ function Login(props) {
       )
       .then((res) => {
         console.log(res);
-        props.setUsername(res.data) 
+        props.setUsername(res.data); 
       })
       .catch((err) => {
         console.error(err);
