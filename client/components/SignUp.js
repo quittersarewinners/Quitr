@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const SignUp = (props) => {
+const navigate = useNavigate();
 //  ENDPOINT   'USER/signup'
   
   const [inputUsername, setInputUsername] = useState('');
@@ -16,7 +18,10 @@ const SignUp = (props) => {
     console.log('name:', name);
    
     //check lengths of input username/pass/name
-
+    if (inputUsername.length === 0 || inputPassword.length === 0 || name === 0) {
+      alert('Please remember to fill out all fields.');
+      return;
+    }
 
 
     //otherwise proceed to the post request
@@ -50,6 +55,7 @@ const SignUp = (props) => {
     setInputUsername('');
     setInputPassword('');
     setName('');
+    navigate('/');
   }
 
 
@@ -85,9 +91,9 @@ const SignUp = (props) => {
             required>
           </input>
         </label>
-        <Link to="/"> 
-          <button onClick={signedUp}>Create Account</button>
-        </Link>
+        {/* <Link to="/">  */}
+        <button onClick={signedUp}>Create Account</button>
+        {/* </Link> */}
       </form>
     </div>
   );
