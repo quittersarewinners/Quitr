@@ -25,7 +25,7 @@ function LeftInfoBody(props) {
 
   useEffect(() => {
     const getStartDay = async () => {
-      const res = await axios.patch('/api/user', userObj );
+      const res = await axios.patch('/api/habit', userObj );
       console.log('this is the response', res);
     };
     getStartDay().catch((err) => console.log(err));

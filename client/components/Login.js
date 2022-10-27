@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-
+import '../styles/login.css'
 
 
 function Login(props) {
@@ -45,6 +45,7 @@ function Login(props) {
 
   return (
     <div>
+      <form>
       <input
         value={inputUsername}
         className='id'
@@ -66,11 +67,12 @@ function Login(props) {
         required
       ></input>
       <div className='LoginButtons'>
-        <input onClick={loggedIn} type='button' value='Submit' />
+        <input onClick={loggedIn} className='button' type='button' value='Submit' />
         <Link to='/signup'> 
-          <input  type='button' value='SignUp' />
+          <input className="button" type='button' value='SignUp' />
         </Link>
       </div>
+      </form>
     </div>
   );
 }

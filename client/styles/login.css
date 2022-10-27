@@ -1,0 +1,22 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+input{
+    margin: 3px
+}
+
+.button{
+    background-color: rgb(132, 143, 255);
+    height: 2rem;
+    transition: .3s;
+    color: whitesmoke;
+    width: 6rem
+}
+
+.button:hover{
+    cursor: pointer;
+    background-color: blueviolet;
+}
