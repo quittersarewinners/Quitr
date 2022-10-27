@@ -1,41 +1,64 @@
 const db = require('../db/dbConnection');
+const bcrypt = require('bcrypt');
+
 
 const userController = {};
 
 userController.getUser = async (req, res, next) => {
-
   try{
     const {username, password} = req.body;
-    const queryString = 'SELECT * FROM users WHERE username = $1;';
-    const values = [username];
-    const findUser = await db.query(queryString, values);
-    if(findUser.rows[0].password === password){
+    // const hashed = await bcrypt.compare(password, hash, function(err, result){
+    //   if(result) console.log('match')
+    //   else console.log('no match')
+    // }) 
+    const queryString = `SELECT * FROM users WHERE username = '${username}';`;
+    // const values = [username]; // req.body.username
+    const findUser = await db.query(queryString);
+    console.log('aaa: ', findUser.rows[0].password);
+    console.log('PASS', password)
+    const compare = await bcrypt.compare(password, findUser.rows[0].password)
+    console.log('COMPARE', compare)
+    if(compare){
       res.locals.user = findUser.rows[0];
-      return next();
     }
-  } catch (err) {
+    else {
+      res.locals.user = 'wrong password';
+    }
+    return next();
+    } catch (err) {
     return next({
       log: 'err get user',
-    });
-  }
-};
+    })
+  } 
 
-userController.createUser = (req, res, next) => {
-  console.log('test1');
-  const query = `INSERT INTO users (name, username, password) VALUES ('${req.body.name}', '${req.body.username}', '${req.body.password}')`;
-  db.query(query)
-    .then(data => {
-      console.log(data.rows);
+}
+  
+
+userController.createUser = async (req, res, next) => {
+ try{ const {name, username, password} = req.body;
+  const saltRounds = 10;
+  await bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(password, salt, async function(err, hash) {
+      const queryText = `INSERT INTO users (name, username, password) VALUES ('${name}', '${username}', '${hash}') RETURNING *;`;
+ const newUser = await db.query(queryText)
+ console.log('USER', newUser.rows)
       return next();
     })
-    .catch(error => {
-      return next({
-        log: 'error in createUser',
-        message: {
-          error: error
-        }
-      });
+
+    })
+} catch(err) {
+  return next({
+    log: 'error in createUser',
+    message: {
+      err: err
+      }
     });
+  // const pswd = password;
+  //const query = `INSERT INTO users (name, username, password) VALUES ('${req.body.name}', '${req.body.username}', '${req.body.password}')`;
+ 
+    
+  };
+
 };
 
 /*

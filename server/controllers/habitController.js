@@ -5,13 +5,13 @@ const habitController = {};
 const formatDate = dateObj => {
   //converts date object to this format: '2022/09/22 06:00' (ex)
   const timeStamp = new Date(); //Oi, Remember that date object month is 0 based, so "09" is October
-  let hours = timeStamp.getHours().toString();
+  // let hours = timeStamp.getHours().toString();
   let day = timeStamp.getDate().toString();
   let month = timeStamp.getMonth().toString();
   const year = timeStamp.getFullYear().toString();
   if (day.length < 2) day = `0${day}`;
   if (month.length < 2) month = `0${month}`;
-  return `${year}/${month}/${day} ${hours}:00`;
+  return `${year}/${month}/${day}`;
 };
 
 const calculateDayDiff = (oldDate, newDate) => {
@@ -72,23 +72,19 @@ habitController.getHabit = async (req, res, next) => {
 
 habitController.createHabit = async (req, res, next) => {
   try {
-    const { userId, habitName } = req.body;
+    const { user_id, type } = req.body;
     const nowTimeStamp = formatDate(new Date());
-
     const insertString =
-      'INSERT INTO habits (owner_id, habit_name, quit_timestamp, has_daily_checkin, streak_count)\
-        VALUES($1, $2, $3, $4, $5) RETURNING *';
-    const values = [userId, habitName, nowTimeStamp, true, 0];
+      `INSERT INTO habits (user_id, type, start_date) VALUES ('${user_id}', '${type}', '${nowTimeStamp}') RETURNING *;`
+    //const values = [userId, habitName, nowTimeStamp, true, 0];
 
-    const { rows } = await db.query(insertString, values);
-
-    res.locals.habit = {
-      ...rows[0],
-      quitLength: {
-        days: 0,
-        hours: 0,
-      }, //appends a property 'quitLength' object to habit object
-    };
+    const newHabit = await db.query(insertString);
+console.log('req', newHabit.rows)
+      // quitLength: {
+      //   days: 0,
+      //   hours: 0,
+      // }, //appends a property 'quitLength' object to habit object
+    // }
     return next();
   } catch (err) {
     return next({
