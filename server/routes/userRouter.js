@@ -26,6 +26,7 @@ router.post('/signup', userController.createUser, (req, res, next) => {
 });
 
 router.post('/login', userController.getUser, (req, res, next) => {
+  console.log('LOCALS+++>===', res.locals.user)
   
   return res.status(201).json(res.locals.user)
  });
