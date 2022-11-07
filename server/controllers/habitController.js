@@ -2,16 +2,107 @@ const db = require('../db/dbConnection');
 
 const habitController = {};
 
+// ITTERATION GROUP
+
+habitController.getHabit = async (req, res, next) => {
+  try {
+    //const { userId } = req.params;
+    const queryString = `SELECT * FROM habits WHERE user_id = '${res.locals.user.user_id}'`;
+    //const habitValues = [userId];
+    const { rows } = await db.query(queryString);
+   res.locals.row = rows[0];
+   console.log('res.locals.row: ', res.locals.row);
+    // if (rows.length === 0) {
+    //   res.locals.habit = undefined;
+    //   return next();
+    // }
+    // const { quit_timestamp } = rows[0];
+
+    // const now = formatDate(new Date());
+
+    // const dayDiff = calculateDayDiff(quit_timestamp, now); //does the math via helper function
+
+    // res.locals.habit = {
+    //   ...rows[0],
+    //   quitLength: dayDiff, //appends a property 'quitLength' object to habit object
+    // };
+    return next();
+  } catch (error) {
+    return next({
+      status: 401,
+      message: {
+        err: `'${error.message}`,
+      },
+      log: `Error occured in habitController.getHabit - ${error.message}  `,
+    });
+  }
+};
+
+//ITTERATION GROUP
+
+habitController.createHabit = async (req, res, next) => {
+  try {
+    const { type } = req.body;
+    const { user_id } = res.locals.userInfo.rows[0];
+    console.log('USERID', user_id)
+    console.log('RESLOCALSUSER', res.locals.userInfo)
+    const nowTimeStamp = new Date();
+    const insertString =
+      `INSERT INTO habits (user_id, type, start_date) VALUES ('${user_id}', '${type}', '${nowTimeStamp}') RETURNING *;`
+    //const values = [userId, habitName, nowTimeStamp, true, 0];
+
+    const newHabit = await db.query(insertString);
+console.log('req', newHabit.rows)
+      // quitLength: {
+      //   days: 0,
+      //   hours: 0,
+      // }, //appends a property 'quitLength' object to habit object
+    // }
+    res.locals.habits = newHabit;
+    return next();
+  } catch (err) {
+    return next({
+      status: 400,
+      message: {
+        err: `'${err.message}`,
+      },
+      log: `Error occured in habitController.createHabit - ${err.message}  `,
+    });
+  }
+};
+// ITTERATION GROUP
+habitController.updateStartDate = async (req, res, next) => {
+  try{
+    const {user_id, start_date} = req.body;
+    const queryText = `UPDATE habits SET start_date = '${start_date}' WHERE user_id = '${user_id}' RETURNING *`;
+    const editDate = await db.query(queryText);
+    console.log('EDITDATE:', editDate);
+    res.locals.update = editDate.rows[0];
+    return next();
+  } catch (err) {
+    return next ({
+      status: 400,
+      message: {
+        err: `${err.message}`
+      },
+      log: 'Error in habitController.updateStartDate'
+    })
+
+  }
+}
+
+/*  SCRATCH TEAM (ANOTHER TEAM) STUFF BELOW */
+
 const formatDate = dateObj => {
   //converts date object to this format: '2022/09/22 06:00' (ex)
   const timeStamp = new Date(); //Oi, Remember that date object month is 0 based, so "09" is October
-  let hours = timeStamp.getHours().toString();
+  // let hours = timeStamp.getHours().toString();
   let day = timeStamp.getDate().toString();
   let month = timeStamp.getMonth().toString();
   const year = timeStamp.getFullYear().toString();
   if (day.length < 2) day = `0${day}`;
   if (month.length < 2) month = `0${month}`;
-  return `${year}/${month}/${day} ${hours}:00`;
+  return `${year}/${month}/${day}`;
 };
 
 const calculateDayDiff = (oldDate, newDate) => {
@@ -37,69 +128,8 @@ const calculateDayDiff = (oldDate, newDate) => {
   };
 };
 
-habitController.getHabit = async (req, res, next) => {
-  try {
-    const { userId } = req.params;
-    const queryString = 'SELECT * FROM habits h WHERE h.owner_id = $1;';
-    const habitValues = [userId];
-    const { rows } = await db.query(queryString, habitValues);
 
-    if (rows.length === 0) {
-      res.locals.habit = undefined;
-      return next();
-    }
-    const { quit_timestamp } = rows[0];
 
-    const now = formatDate(new Date());
-
-    const dayDiff = calculateDayDiff(quit_timestamp, now); //does the math via helper function
-
-    res.locals.habit = {
-      ...rows[0],
-      quitLength: dayDiff, //appends a property 'quitLength' object to habit object
-    };
-    return next();
-  } catch (error) {
-    return next({
-      status: 401,
-      message: {
-        err: `'${error.message}`,
-      },
-      log: `Error occured in habitController.getHabit - ${error.message}  `,
-    });
-  }
-};
-
-habitController.createHabit = async (req, res, next) => {
-  try {
-    const { userId, habitName } = req.body;
-    const nowTimeStamp = formatDate(new Date());
-
-    const insertString =
-      'INSERT INTO habits (owner_id, habit_name, quit_timestamp, has_daily_checkin, streak_count)\
-        VALUES($1, $2, $3, $4, $5) RETURNING *';
-    const values = [userId, habitName, nowTimeStamp, true, 0];
-
-    const { rows } = await db.query(insertString, values);
-
-    res.locals.habit = {
-      ...rows[0],
-      quitLength: {
-        days: 0,
-        hours: 0,
-      }, //appends a property 'quitLength' object to habit object
-    };
-    return next();
-  } catch (err) {
-    return next({
-      status: 400,
-      message: {
-        err: `'${err.message}`,
-      },
-      log: `Error occured in habitController.createHabit - ${err.message}  `,
-    });
-  }
-};
 // In order to make the has_daily_checkin field reset to false every 24 hours: we must
 // implement an EVENT in the database (preferably in the createHabit middleware).
 //
@@ -149,6 +179,8 @@ habitController.checkIn = async (req, res, next) => {
     });
   }
 };
+
+
 
 // Resets the user's quit timestamp when they 'cave in' on a habit
 habitController.resetHabit = async (req, res, next) => {

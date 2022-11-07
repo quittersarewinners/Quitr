@@ -26,5 +26,11 @@ router.post('/newday', habitController.newDay, (req, res) => {
   res.status(200).json(res.locals.habit); //updates quitLength to + 1 day.
 });
 
+//ITTERATION GROUP
+
+router.patch('/', habitController.updateStartDate, (req, res) => {
+  res.status(202).json(res.locals.update)
+})
+
 module.exports = router;
-2;
+
